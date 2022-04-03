@@ -1,0 +1,206 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Input;
+use App\User;
+use App\Office;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use UAParser\Parser;
+use App\Imports\InputsImport;
+use Maatwebsite\Excel\Facades\Excel;
+
+class InputController extends Controller
+{
+    public function index()
+    {
+        $users = User::get();
+        $inputs = Input::orderBy('id')->get();
+        return view('inputs.index', compact('inputs', 'users'));
+        // $input = new Input();
+        // return $input->getBrowser($_SERVER ["HTTP_USER_AGENT"]);
+    }
+
+    public function store()
+    {
+        $user = Auth::user();
+        $ipAgency = $user->office->ip;
+        $phoneRegist = $user->phone;
+
+        // $now = Carbon::now()->subMinutes(2);
+        $now = Carbon::now();
+        $date = $now->format('Y-m-d');
+
+
+        $agenteDeUsuario = $_SERVER["HTTP_USER_AGENT"];
+        $resultado = Parser::create()->parse($agenteDeUsuario);
+
+        $input = new Input();
+        $ipUser = $input->getIp();
+        $phoneUser = $resultado->device->family;
+        $inputsNow = $input->inputNow($user->id, $date)->count();
+
+        $dateAgency = Carbon::create($user->office->intro);
+        $inputAgency =Carbon::create($now->year, $now->month, $now->day, $dateAgency->hour, $dateAgency->minute, $dateAgency->second);
+        $dif = ($inputAgency->diffInMinutes($now, false));
+
+        if ($user->office->name != 'AGENCIA NACIONAL') {
+            // if ($ipUser == $ipAgency) {
+                if ($phoneRegist == $phoneUser) {
+                    if ($inputsNow == 0) {
+                        if ($dif > 0) {
+                            $input->ip = $input->getIp();
+                            $input->phone = $phoneUser;
+                            $input->date = $now->format('Y-m-d');
+                            $input->hour = $now->format('H:i:s');
+                            $input->state = 1;
+                            $input->delayed = $dif;
+                            $input->user_id = $user->id;
+                            $input->save();
+                            return back()->with('confirmation','Entrada Registrado con Retrazo');
+                        } else {
+                            $input->ip = $input->getIp();
+                            $input->phone = $phoneUser;
+                            $input->date = $now->format('Y-m-d');
+                            $input->hour = $now->format('H:i:s');
+                            $input->state = 0;
+                            $input->user_id = $user->id;
+                            $input->save();
+                            return back()->with('confirmation','Entrada Registrado Correctamente');
+                        }
+                    } else {
+                        return back()->with('validation','Entrada ya Marcada HOY');
+                    }
+                } else {
+                    return back()->with('validation','WIFI Correcto, Dispositivo Incorrecto');
+                }
+
+            // } else {
+            //     return back()->with('validation','WIFI Incorrecto');
+            // }
+        } else {
+            if (Office::where('ip', '=', $ipUser)->exists()) {
+                if ($phoneRegist == $phoneUser) {
+                    if ($inputsNow == 0) {
+                        if ($dif > 0) {
+                            $input->ip = $input->getIp();
+                            $input->phone = $phoneUser;
+                            $input->date = $now->format('Y-m-d');
+                            $input->hour = $now->format('H:i:s');
+                            $input->state = 1;
+                            $input->delayed = $dif;
+                            $input->user_id = $user->id;
+                            $input->save();
+                            return back()->with('confirmation','Entrada Registrado con Retrazo');
+                        } else {
+                            $input->ip = $input->getIp();
+                            $input->phone = $phoneUser;
+                            $input->date = $now->format('Y-m-d');
+                            $input->hour = $now->format('H:i:s');
+                            $input->state = 0;
+                            $input->user_id = $user->id;
+                            $input->save();
+                            return back()->with('confirmation','Entrada Registrado Correctamente');
+                        }
+                    } else {
+                        return back()->with('validation','Entrada ya Marcada HOY');
+                    }
+                } else {
+                    return back()->with('validation','WIFI Correcto, Dispositivo Incorrecto');
+                }
+
+            } else {
+                return back()->with('validation','WIFI Incorrecto');
+            }
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $input = Input::where('id','=', $id)->firstOrFail();
+
+        $user = Auth::user();
+        $now = Carbon::now()->subMinutes(2);
+        $inputAgency = Carbon::create($user->office->intro);
+        $inputNew =Carbon::create($request->hour);
+        $dif = ($inputAgency->diffInMinutes($inputNew, false));
+        if ($dif > 0) {
+            $request["state"]=1;
+            $request["delayed"]=$dif;
+            $input->update($request->all());
+        } else {
+            $request["state"]=0;
+            $request["delayed"]=null;
+            $input->update($request->all());
+        }
+
+        return back()->with('confirmation','Entrada Actualizado Correctamente');
+    }
+
+    public function destroy($id)
+    {
+        $input = Input::where('id', '=', $id)->firstOrFail();
+        $input->delete();
+        return back()->with('confirmation','Entrada Eliminado Correctamente');
+    }
+
+    public function destroyall()
+    {
+        $inputs = Input::all();
+        foreach ($inputs as $input) {
+            $input->delete();
+        }
+        // return $inputs;
+        return back()->with('confirmation','Entradas Eliminadas Correctamente');
+    }
+
+
+    public function marck()
+    {
+        return view('inputs.mark');
+    }
+
+
+
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+        Excel::import(new InputsImport, $file);
+        return back()->with('message','importacion correcta');
+    }
+
+
+
+    public function storeImp(Request $request)
+    {
+        $dateUser = Carbon::create($request->date);
+
+        $user = User::where('id', '=', $request->user_id)->firstOrFail();
+        $dateAgency = Carbon::create($user->office->intro);
+        $inputAgency =Carbon::create($dateUser->year, $dateUser->month, $dateUser->day, $dateAgency->hour, $dateAgency->minute, $dateAgency->second);
+
+        $hourUser = Carbon::create($request->hour);
+        $inputUser =Carbon::create($dateUser->year, $dateUser->month, $dateUser->day, $hourUser->hour, $hourUser->minute, $hourUser->second);
+
+        $dif = ($inputAgency->diffInMinutes($inputUser, false));
+
+        $input = new Input();
+        $input->ip = $request->ip;
+        $input->phone = $user->phone;
+        $input->date = $request->date;
+        $input->hour = $request->hour;
+        if ($dif > 0) {
+            $input->state = 1;
+            $input->delayed = $dif;
+        } else {
+            $input->state = 0;
+        }
+        $input->user_id = $request->user_id;
+        $input->save();
+        return back()->with('confirmation','Entrada Registrado con Exito');
+        return $request;
+    }
+}
