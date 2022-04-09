@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User;
+use App\Models\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,188 +12,217 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-
-
-        $admin = User::create([
-                    'name'       => 'ADMINISTRADOR',
-                    'email'      => 'adm@gmail.com',
-                    'password'      => bcrypt('6754212567542125'),
-                    'phone'       => 'Other',
-                    'office_id'      => 1,
-        ]);
-        $admin->assignRole('ADMINISTRADOR');
-
         $gg = User::create([
-                    'name'       => 'LUIS ALEJANDRO ARZE RICO',
-                    'email'      => 'proeza.ale@gmail.com',
-                    'password'      => bcrypt('proezaalejandro2021'),
-                    'phone'       => 'Other',
-                    'office_id'      => 1,
-                ]);
+            'name'       => 'LUIS ALEJANDRO ARZE RICO',
+            'vacation'       => '14',
+            'email'      => 'proeza.ale@gmail.com',
+            'password'      => bcrypt('proezaalejandro2021'),
+            'phone'       => 'Other',
+            'agency_id'      => 1,
+        ]);
         $gg->assignRole('GERENCIA GENERAL');
 
         $rrhh = User::create([
             'name'       => 'MARTHA PAOLA AMADOR',
+            'vacation'       => '15',
             'email'      => 'proeza.marthapaola@gmail.com',
             'password'      => bcrypt('proezamarthapaola2021'),
-            'phone'       => 'Moto G Play',
-            'office_id'      => 1,
+            'phone'       => 'Huawei Browser',
+            'agency_id'      => 1,
         ]);
-        $rrhh->assignRole('SUB GERENCIA NACIONAL DE RECURSOS HUMANOS');
+        $rrhh->assignRole('DEPARTAMENTO NACIONAL DE RECURSOS HUMANOS');
 
         $gnc = User::create([
             'name'       => 'GUALBERTO EDSSON COCA VARGAS',
+            'vacation'       => '8',
             'email'      => 'proeza.edsson@gmail.com',
             'password'      => bcrypt('proezaedsson2021'),
             'phone'       => 'Samsung SM-A315G',
-            'office_id'      => 1,
+            'agency_id'      => 1,
         ]);
-        $gnc->assignRole('SUB GERENCIA NACIONAL COMERCIAL');
+        $gnc->assignRole('DEPARTAMENTO NACIONAL COMERCIAL');
 
         $gncgo = User::create([
             'name'       => 'LIMBERT RODRÍGUEZ ORELLANA',
+            'vacation'       => '3',
             'email'      => 'proeza.limbert@gmail.com',
             'password'      => bcrypt('proezalimbert2021'),
             'phone'       => 'XiaoMi Redmi Note 7',
-            'office_id'      => 1,
+            'agency_id'      => 1,
         ]);
-        $gncgo->assignRole('SUB GERENCIA NACIONAL DE CONTABILIDAD Y GESTION OPERATIVA');
+        $gncgo->assignRole('DEPARTAMENTO NACIONAL DE CONTABILIDAD Y GESTION OPERATIVA');
 
         $gnal = User::create([
             'name'       => 'TERESA ALBA MIRANDA',
+            'vacation'       => '9',
             'email'      => 'proeza.teresa@gmail.com',
             'password'      => bcrypt('proezateresa2021'),
             'phone'       => 'MAR-LX3A',
-            'office_id'      => 1,
+            'agency_id'      => 1,
         ]);
-        $gnal->assignRole('SUB GERENCIA NACIONAL DE ASESORIA LEGAL');
-
-        $gno = User::create([
-            'name'       => 'JHOANA BRENDA JIMENEZ FLORES',
-            'email'      => 'proeza.brenda@gmail.com',
-            'password'      => bcrypt('proezabrenda2021'),
-            'phone'       => 'Samsung SM-J610G',
-            'office_id'      => 1,
-        ]);
-        $gno->assignRole('SUB GERENCIA NACIONAL DE OPERACIONES');
+        $gnal->assignRole('DEPARTAMENTO NACIONAL DE ASESORIA LEGAL');
 
         $jtic = User::create([
             'name'       => 'ROGER ALDAIR HUARACHI TAPIA',
+            'vacation'       => '12',
             'email'      => 'proeza.roger@gmail.com',
             'password'      => bcrypt('6754212567542125'),
-            'phone'       => 'Che2-L23',
-            'office_id'      => 1,
+            'phone'       => 'M2151K6G',
+            'agency_id'      => 1,
         ]);
-        $jtic->assignRole('JEFATURA NACIONAL DE TECNOLOGIA DE LA INFORMACION Y COMUNICACION');
+        $jtic->assignRole('TIC');
+
+        $gno = User::create([
+            'name'       => 'ELIZABETH CALLE COAQUIRA',
+            'vacation'       => '8',
+            'email'      => 'proeza.elycalle@gmail.com',
+            'password'      => bcrypt('proezaelycalle2021'),
+            'phone'       => 'Samsung SM-A115M',
+            'agency_id'      => 1,
+        ]);
+        $gno->assignRole('ENCARGADO NACIONAL DE CREDITOS');
+
+        $gno = User::create([
+            'name'       => 'JHOANA BRENDA JIMENEZ FLORES',
+            'vacation'       => '1',
+            'email'      => 'proeza.brenda@gmail.com',
+            'password'      => bcrypt('proezabrenda2021'),
+            'phone'       => 'Samsung SM-A125M',
+            'agency_id'      => 2,
+        ]);
+        $gno->assignRole('ENCARGADO NACIONAL DE OPERACIONES');
+
 
 
         $jas = [
             [
-                'name'       => 'ELIZABETH CALLE COAQUIRA',
-                'email'      => 'proeza.elycalle@gmail.com',
-                'password'      => bcrypt('proezaelycalle2021'),
-                'phone'       => 'Samsung SM-A115M',
-                'office_id'      => 2,
+                'name'       => 'CARLA ANDREA CLAROS PEREDO',
+                'vacation'       => '11',
+                'email'      => 'proeza.carla22@gmail.com',
+                'password'      => bcrypt('proezacarla222021'),
+                'phone'       => 'iPhone',
+                'agency_id'      => 2,
             ],
             [
-                'name'       => 'PABLO CHOQUE CAYO',
-                'email'      => 'proeza.pablochoque@gmail.com',
-                'password'      => bcrypt('proezapablochoque2021'),
-                'phone'       => 'Samsung SM-A105M',
-                'office_id'      => 3,
+                'name'       => 'ALEX GUERRA GUZMAN',
+                'vacation'       => '11',
+                'email'      => 'proeza.alex@gmail.com',
+                'password'      => bcrypt('proezaalex2021'),
+                'phone'       => 'Huawei STK-LX3',
+                'agency_id'      => 3,
             ],
             [
                 'name'       => 'ROXANA LLANOS MAMANI',
+                'vacation'       => '12',
                 'email'      => 'proeza.roxana@gmail.com',
                 'password'      => bcrypt('proezaroxana2021'),
                 'phone'       => 'Samsung SM-G532M',
-                'office_id'      => 4,
+                'agency_id'      => 4,
+            ],
+            [
+                'name'       => 'LISCIEN MARIELA SANTALLA ANCE',
+                'vacation'       => '15',
+                'email'      => 'proeza.mariela@gmail.com',
+                'password'      => bcrypt('proezamariela2021'),
+                'phone'       => 'M2151K7BL',
+                'agency_id'      => 5,
             ],
             [
                 'name'       => 'VERONICA ANEIVA SALAZAR',
+                'vacation'       => '7',
                 'email'      => 'proeza.veronica@gmail.com',
                 'password'      => bcrypt('proezaveronica2021'),
-                'phone'       => 'Samsung SM-A217M',
-                'office_id'      => 6,
+                'phone'       => 'Samsung SM-A325M',
+                'agency_id'      => 6,
             ]
         ];
         foreach ($jas as $ja) {
             $userG = User::create([
                 'name'       => $ja['name'],
+                'vacation'       => '15',
                 'email'       => $ja['email'],
                 'password'       => $ja['password'],
                 'phone'       => $ja['phone'],
-                'office_id'       => $ja['office_id'],
+                'agency_id'       => $ja['agency_id'],
             ]);
-            $userG->assignRole('JEFE DE AGENCIA');
+            $userG->assignRole('ENCARGADO DE SUCURSAL');
         }
 
 
         $asesors = [
             [
-                'name'       => 'ALEX GUERRA GUZMAN',
-                'email'      => 'proeza.alex@gmail.com',
-                'password'      => bcrypt('proezaalex2021'),
-                'phone'       => 'Huawei STK-LX3',
-                'office_id'      => 2,
-            ],
-            [
-                'name'       => 'CARLA ANDREA CLAROS PEREDO',
-                'email'      => 'proeza.carla22@gmail.com',
-                'password'      => bcrypt('proezacarla222021'),
-                'phone'       => 'Samsung SM-G950F',
-                'office_id'      => 2,
-            ],
-            [
                 'name'       => 'JHONNY PEDRO HUAYHUASI SOLIS',
+                'vacation'       => '10',
                 'email'      => 'proeza.jhonny9@gmail.com',
                 'password'      => bcrypt('proezajhonny92021'),
-                'phone'       => 'F3313',
-                'office_id'      => 2,
+                'phone'       => 'XiaoMi Redmi Note 7',
+                'agency_id'      => 2,
+            ],
+            [
+                'name'       => 'PABLO CHOQUE CAYO',
+                'vacation'       => '12',
+                'email'      => 'proeza.pablochoque@gmail.com',
+                'password'      => bcrypt('proezapablochoque2021'),
+                'phone'       => 'Samsung SM-A155M',
+                'agency_id'      => 3,
             ],
             [
                 'name'       => 'ARACELY MONTOYA ANDIA',
+                'vacation'       => '12',
                 'email'      => 'proeza.aracely@gmail.com',
                 'password'      => bcrypt('proezaaracely2021'),
                 'phone'       => 'XiaoMi Redmi S2',
-                'office_id'      => 3,
-            ],
-            [
-                'name'       => 'MERY GARCIA AÑAMOR',
-                'email'      => 'proeza.merygarcia@gmail.com',
-                'password'      => bcrypt('proezamerygarcia2021'),
-                'phone'       => 'TECNO CE7j',
-                'office_id'      => 3,
+                'agency_id'      => 3,
             ],
             [
                 'name'       => 'ROCIO CLAROS ROJAS',
+                'vacation'       => '12',
                 'email'      => 'proeza.rocio@gmail.com',
                 'password'      => bcrypt('proezarocio2021'),
-                'phone'       => 'Huawei PRA-LX3',
-                'office_id'      => 4,
+                'phone'       => 'Samsung SM-A115M',
+                'agency_id'      => 4,
             ],
             [
-                'name'       => 'JOSE RAMOS YUJRA',
-                'email'      => 'proeza.ramos@gmail.com',
-                'password'      => bcrypt('proezaramos2021'),
-                'phone'       => 'Samsung SM-J200M',
-                'office_id'      => 5,
+                'name'       => 'ZULEMA IRIARTE TORRICO',
+                'vacation'       => '0',
+                'email'      => 'proeza.zulemairiarte@gmail.com',
+                'password'      => bcrypt('proezazulemairiarte2021'),
+                'phone'       => 'TECNO KE5k',
+                'agency_id'      => 4,
             ],
             [
-                'name'       => 'DOUGLAS COPA RODRIGUEZ',
-                'email'      => 'proeza.douglas@gmail.com',
-                'password'      => bcrypt('proezadouglas2021'),
-                'phone'       => 'Samsung SM-J260M',
-                'office_id'      => 5,
-            ]
+                'name'       => 'NIDELVIA JIMÉNEZ HUARAYO',
+                'vacation'       => '15',
+                'email'      => 'proeza.nidelvia@gmail.com',
+                'password'      => bcrypt('proezanidelvia2021'),
+                'phone'       => 'XiaoMi Redmi Note 8 Pro',
+                'agency_id'      => 5,
+            ],
+            [
+                'name'       => 'LIDIA LEQUIPE QUISPE',
+                'vacation'       => '13',
+                'email'      => 'proeza.lidia@gmail.com',
+                'password'      => bcrypt('proezalidia92021'),
+                'phone'       => 'Samsung SM-A115M',
+                'agency_id'      => 6,
+            ],
+            [
+                'name'       => 'WILLIAMS YHAMIL SIRPA',
+                'vacation'       => '12',
+                'email'      => 'proeza.williams@gmail.com',
+                'password'      => bcrypt('proezawilliams2021'),
+                'phone'       => 'Samsung SM-A725M',
+                'agency_id'      => 6,
+            ],
         ];
         foreach ($asesors as $asesor) {
             $userG = User::create([
                 'name'       => $asesor['name'],
+                'vacation'       => '15',
                 'email'       => $asesor['email'],
                 'password'       => $asesor['password'],
                 'phone'       => $asesor['phone'],
-                'office_id'       => $asesor['office_id'],
+                'agency_id'       => $asesor['agency_id'],
             ]);
             $userG->assignRole('ASESOR');
         }
@@ -201,62 +230,78 @@ class UsersTableSeeder extends Seeder
 
         $pasantes = [
             [
-                'name'       => 'CELIA TICONA',
-                'email'      => 'proeza.celia@gmail.com',
-                'password'      => bcrypt('proezacelia2021'),
+                'name'       => 'YASHIRA DANYA CHAVEZ CAMACHO',
+                'vacation'       => '0',
+                'email'      => 'proeza.danya@gmail.com',
+                'password'      => bcrypt('proezadanya2021'),
+                'phone'       => 'TECNO CE7j',
+                'agency_id'      => 2,
+            ],
+            [
+                'name'       => 'NATALY ALISSIN GUERRERO MENDIZABAL',
+                'vacation'       => '0',
+                'email'      => 'proeza.nataly@gmail.com',
+                'password'      => bcrypt('proezanataly2021'),
                 'phone'       => 'Samsung SM-J260MU',
-                'office_id'      => 4,
+                'agency_id'      => 2,
             ],
             [
-                'name'       => 'WILMER GUAMAN VARGAS',
-                'email'      => 'proezawilmerguaman@gmail.com',
-                'password'      => bcrypt('proezawilmerguaman2021'),
+                'name'       => 'MARIA LUISA BLAD TUBIETA',
+                'vacation'       => '0',
+                'email'      => 'proeza.mariablaz@gmail.com',
+                'password'      => bcrypt('proezamariablaz2021'),
                 'phone'       => 'Samsung SM-J250M',
-                'office_id'      => 4,
+                'agency_id'      => 2,
             ],
             [
-                'name'       => 'LISCIEN MARIELA SANTALLA ANCE',
-                'email'      => 'proeza.mariela@gmail.com',
-                'password'      => bcrypt('proezamariela2021'),
+                'name'       => 'RODRIGO ADONAY SANCHES DOMINGUEZ',
+                'vacation'       => '0',
+                'email'      => 'proeza.rodrigosanchez@gmail.com',
+                'password'      => bcrypt('proezarodrigosanchez2021'),
                 'phone'       => 'Samsung SM-J415G',
-                'office_id'      => 4,
+                'agency_id'      => 2,
             ],
             [
-                'name'       => 'NIDELVIA JIMÉNEZ HUARAYO',
-                'email'      => 'proeza.nidelvia@gmail.com',
-                'password'      => bcrypt('proezanidelvia2021'),
+                'name'       => 'ERMINIA ALMENDRAS JIMENEZ',
+                'vacation'       => '0',
+                'email'      => 'proeza.erminia@gmail.com',
+                'password'      => bcrypt('proezaerminia2021'),
                 'phone'       => 'XiaoMi Redmi Note 8 Pro',
-                'office_id'      => 4,
+                'agency_id'      => 4,
             ],
             [
-                'name'       => 'LIDIA LEQUIPE QUISPE',
-                'email'      => 'proeza.lidia@gmail.com',
-                'password'      => bcrypt('proezalidia92021'),
+                'name'       => 'ELIZABETH VILLCA CHOQUE',
+                'vacation'       => '0',
+                'email'      => 'proeza.elizabeth@gmail.com',
+                'password'      => bcrypt('proezaelizabeth2021'),
                 'phone'       => 'Samsung SM-A505G',
-                'office_id'      => 6,
+                'agency_id'      => 5,
             ],
             [
-                'name'       => 'WILLIAMS YHAMIL SIRPA',
-                'email'      => 'proeza.williams@gmail.com',
+                'name'       => 'ANGEL CACERES SEJAS',
+                'vacation'       => '0',
+                'email'      => 'proeza.angel@gmail.com',
+                'password'      => bcrypt('proezaangel2021'),
+                'phone'       => 'Samsung SM-A715F',
+                'agency_id'      => 5,
+            ],
+            [
+                'name'       => 'GLADIS TRONCOSO VELIZ',
+                'vacation'       => '0',
+                'email'      => 'proeza.gladys@gmail.com',
                 'password'      => bcrypt('proezawilliams2021'),
                 'phone'       => 'Samsung SM-A715F',
-                'office_id'      => 6,
-            ],
-            [
-                'name'       => 'MARIANA NILA ROJAS RICO',
-                'email'      => 'proeza.mariana@gmail.com',
-                'password'      => bcrypt('proezamariana2021'),
-                'phone'       => 'Huawei ANE-LX3',
-                'office_id'      => 6,
-            ],
+                'agency_id'      => 6,
+            ]
         ];
         foreach ($pasantes as $pasante) {
             $userG = User::create([
                 'name'       => $pasante['name'],
+            'vacation'       => '15',
                 'email'       => $pasante['email'],
                 'password'       => $pasante['password'],
                 'phone'       => $pasante['phone'],
-                'office_id'       => $pasante['office_id'],
+                'agency_id'       => $pasante['agency_id'],
             ]);
             $userG->assignRole('PASANTE');
         }

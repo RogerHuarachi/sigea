@@ -12,8 +12,36 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        $admin = Role::create(['name' => 'ADMINISTRADOR']);
-        $admin->givePermissionTo([
+		$GG = Role::create(['name' => 'GERENCIA GENERAL']);
+		$GG->givePermissionTo([
+        	'inputs.store',
+        	'outputs.store',
+        	'assistences.index',
+		]);
+		$RRHH = Role::create(['name' => 'DEPARTAMENTO NACIONAL DE RECURSOS HUMANOS']);
+		$RRHH->givePermissionTo([
+        	'inputs.store',
+        	'outputs.store',
+        	'assistences.index',
+		]);
+		$GNCGO = Role::create(['name' => 'DEPARTAMENTO NACIONAL DE CONTABILIDAD Y GESTION OPERATIVA']);
+		$GNCGO->givePermissionTo([
+        	'inputs.store',
+        	'outputs.store',
+		]);
+		$GNC = Role::create(['name' => 'DEPARTAMENTO NACIONAL COMERCIAL']);
+		$GNC->givePermissionTo([
+        	'inputs.store',
+        	'outputs.store',
+		]);
+		$GNAL = Role::create(['name' => 'DEPARTAMENTO NACIONAL DE ASESORIA LEGAL']);
+		$GNAL->givePermissionTo([
+        	'inputs.store',
+        	'outputs.store',
+        ]);
+
+		$JNTIC = Role::create(['name' => 'TIC']);
+		$JNTIC->givePermissionTo([
         	'permissions.index',
         	'permissions.store',
         	'permissions.update',
@@ -39,58 +67,37 @@ class RolesTableSeeder extends Seeder
         	'outputs.update',
         	'outputs.destroy',
 
-        	'departaments.index',
-        	'departaments.store',
-        	'departaments.update',
-        	'departaments.destroy',
+        	'cities.index',
+        	'cities.store',
+        	'cities.update',
+        	'cities.destroy',
 
-        	'offices.index',
-        	'offices.store',
-        	'offices.update',
-        	'offices.destroy',
+        	'agencies.index',
+        	'agencies.store',
+        	'agencies.update',
+        	'agencies.destroy',
+
+        	'absences.index',
+        	'absences.store',
+        	'absences.update',
+        	'absences.destroy',
 
         	'assistences.index',
-		]);
-		$GG = Role::create(['name' => 'GERENCIA GENERAL']);
-		$GG->givePermissionTo([
-        	'inputs.store',
-        	'outputs.store',
-        	'assistences.index',
-		]);
-		$RRHH = Role::create(['name' => 'SUB GERENCIA NACIONAL DE RECURSOS HUMANOS']);
-		$RRHH->givePermissionTo([
-        	'inputs.store',
-        	'outputs.store',
-        	'assistences.index',
-		]);
-		$GNCGO = Role::create(['name' => 'SUB GERENCIA NACIONAL DE CONTABILIDAD Y GESTION OPERATIVA']);
-		$GNCGO->givePermissionTo([
-        	'inputs.store',
-        	'outputs.store',
-		]);
-		$GNC = Role::create(['name' => 'SUB GERENCIA NACIONAL COMERCIAL']);
-		$GNC->givePermissionTo([
-        	'inputs.store',
-        	'outputs.store',
-		]);
-		$GNAL = Role::create(['name' => 'SUB GERENCIA NACIONAL DE ASESORIA LEGAL']);
-		$GNAL->givePermissionTo([
-        	'inputs.store',
-        	'outputs.store',
         ]);
-		$GNO = Role::create(['name' => 'SUB GERENCIA NACIONAL DE OPERACIONES']);
+
+		$JA = Role::create(['name' => 'ENCARGADO NACIONAL DE CREDITOS']);
+		$JA->givePermissionTo([
+        	'inputs.store',
+        	'outputs.store',
+		]);
+
+		$GNO = Role::create(['name' => 'ENCARGADO NACIONAL DE OPERACIONES']);
 		$GNO->givePermissionTo([
         	'inputs.store',
         	'outputs.store',
         ]);
 
-		$JNTIC = Role::create(['name' => 'JEFATURA NACIONAL DE TECNOLOGIA DE LA INFORMACION Y COMUNICACION']);
-		$JNTIC->givePermissionTo([
-        	'inputs.store',
-        	'outputs.store',
-        ]);
-
-		$JA = Role::create(['name' => 'JEFE DE AGENCIA']);
+		$JA = Role::create(['name' => 'ENCARGADO DE SUCURSAL']);
 		$JA->givePermissionTo([
         	'inputs.store',
         	'outputs.store',

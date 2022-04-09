@@ -48,10 +48,10 @@
                             <tbody>
                                 @foreach ($inputs as $input)
                                     <tr>
-                                        <td>{{ $input->user->office->name }}</td>
-                                        <td>{{ $input->user->office->intro }}</td>
-                                        <td>{{ $input->user->office->exit }}</td>
-                                        <td>{{ $input->user->office->ip }}</td>
+                                        <td>{{ $input->user->agency->name }}</td>
+                                        <td>{{ $input->user->agency->intro }}</td>
+                                        <td>{{ $input->user->agency->exit }}</td>
+                                        <td>{{ $input->user->agency->ip }}</td>
 
                                         <td>{{ $input->user->name }}</td>
                                         <td>{{ $input->user->phone }}</td>
