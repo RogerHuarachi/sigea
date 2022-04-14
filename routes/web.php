@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/registerMovile', 'UserController@register')->name('register');
+Route::get('/registerMovile', 'Admin\UserController@register')->name('register');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -95,6 +95,13 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('permission:absences.update');
     Route::delete('absences/{absence}', 'Admin\AbsenceController@destroy')->name('absences.destroy')
         ->middleware('permission:absences.destroy');
+
+
+        
+    Route::get('absences/first/{absence}', 'Admin\AbsenceController@first')->name('absences.first');
+        // ->middleware('permission:absences.first');
+    Route::get('absences/second/{absence}', 'Admin\AbsenceController@second')->name('absences.second');
+        // ->middleware('permission:absences.first');
 
 
     //Dashboard Asitencia

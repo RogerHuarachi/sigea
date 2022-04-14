@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Agency;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
+use UAParser\Parser;
 
 class UserController extends Controller
 {
@@ -79,5 +80,16 @@ class UserController extends Controller
     {
         $user->delete();
         return back()->with('confirmation','Usuario Eliminado Correctamente');
+    }
+
+
+    public function register()
+    {
+        $agenteDeUsuario = $_SERVER["HTTP_USER_AGENT"];
+        $resultado = Parser::create()->parse($agenteDeUsuario);
+
+        $dispositivo = $resultado->device->family;
+        return $dispositivo;
+        
     }
 }

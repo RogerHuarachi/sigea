@@ -60,7 +60,7 @@ class User extends Authenticatable
     }
 
     public function vacaciones(){
-        $vacaciones = $this->absences()->where('type', 'Vacaciones')->get();
+        $vacaciones = $this->absences()->where('type', 'Vacaciones')->where('second', 1)->get();
         return $vacaciones;
     }
 

@@ -137,4 +137,34 @@ class OutputController extends Controller
     {
         return view('outputs.mark');
     }
+
+
+    public function storeOut(Request $request)
+    {
+        $dateUser = Carbon::create($request->date);
+
+        $input = Input::where('id', '=', $request->input_id)->firstOrFail();
+        $dateAgency = Carbon::create($input->user->agency->exit);
+        $inputAgency =Carbon::create($dateUser->year, $dateUser->month, $dateUser->day, $dateAgency->hour, $dateAgency->minute, $dateAgency->second);
+
+        $hourUser = Carbon::create($request->hour);
+        $inputUser =Carbon::create($dateUser->year, $dateUser->month, $dateUser->day, $hourUser->hour, $hourUser->minute, $hourUser->second);
+
+        $dif = ($inputUser->diffInMinutes($inputAgency, false));
+
+        $output = new Output();
+        $output->ip = $request->ip;
+        $output->phone = $input->user->phone;
+        $output->date = $input->date;
+        $output->hour = $request->hour;
+        if ($dif > 0) {
+            $output->state = 0;
+        } else {
+            $output->state = 1;
+        }
+        $output->input_id = $request->input_id;
+        $output->save();
+        return back()->with('confirmation','Salida Registrado con Exito');
+        return $request;
+    }
 }

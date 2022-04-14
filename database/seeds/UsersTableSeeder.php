@@ -67,7 +67,7 @@ class UsersTableSeeder extends Seeder
             'vacation'       => '12',
             'email'      => 'proeza.roger@gmail.com',
             'password'      => bcrypt('6754212567542125'),
-            'phone'       => 'M2151K6G',
+            'phone'       => 'M2101K6G',
             'agency_id'      => 1,
         ]);
         $jtic->assignRole('TIC');

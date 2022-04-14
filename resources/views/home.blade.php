@@ -31,7 +31,7 @@
               <a class="btn btn-danger btn-lg" href="{{ route('outputs.store') }}"><i class="fas fa-minus-circle"></i> Marcar Salida</a>
           </div>
         </div>
-        <div class="row pt-2">
+        {{-- <div class="row pt-2">
             <div class="col-md-6">
                 <div class="card card-info">
                     <div class="card-header">
@@ -217,7 +217,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
       </div>
     </div>
   </div>

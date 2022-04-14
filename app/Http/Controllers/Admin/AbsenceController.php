@@ -23,17 +23,17 @@ class AbsenceController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->type == 'Vacaciones') {
-            $user = User::where('id','=', $request->user_id)->firstOrFail();
-            $user->vacation = $user->vacation-1;
-            $user->save();
+        // if ($request->type == 'Vacaciones') {
+        //     $user = User::where('id','=', $request->user_id)->firstOrFail();
+        //     $user->vacation = $user->vacation-1;
+        //     $user->save();
 
-            Absence::create($request->all());
-            return back()->with('confirmation','Registrado Correctamente');
-        } else {
-            Absence::create($request->all());
-            return back()->with('confirmation','Registrado Correctamente');
-        }
+        //     Absence::create($request->all());
+        //     return back()->with('confirmation','Registrado Correctamente');
+        // } else {
+        //     Absence::create($request->all());
+        //     return back()->with('confirmation','Registrado Correctamente');
+        // }
 
         Absence::create($request->all());
         return back()->with('confirmation','Registrado Correctamente');
@@ -59,5 +59,34 @@ class AbsenceController extends Controller
     {
         $absence->delete();
         return back()->with('confirmation', 'Eliminado Correctamente');
+    }
+
+
+
+    
+
+    public function first(Absence $absence)
+    {
+        $absence->first = true;
+        $absence->save();
+        return back()->with('confirmation','Aprobado Correctamente');
+    }
+    
+    public function second(Absence $absence)
+    {
+        if ($absence->second == false) {
+            
+            $user = $absence->user;
+            $user->vacation = $user->vacation-1;
+            $user->save();
+
+            $absence->second = true;
+            $absence->save();
+            return back()->with('confirmation','Aprobado Correctamente');
+        } else {
+            return back()->with('confirmation','Aprobado Correctamente');
+        }
+        
+        
     }
 }

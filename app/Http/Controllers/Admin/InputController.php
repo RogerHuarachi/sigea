@@ -133,4 +133,34 @@ class InputController extends Controller
     {
         return view('inputs.mark');
     }
+
+    public function storeImp(Request $request)
+    {
+        $dateUser = Carbon::create($request->date);
+
+        $user = User::where('id', '=', $request->user_id)->firstOrFail();
+        $dateAgency = Carbon::create($user->agency->intro);
+        $inputAgency =Carbon::create($dateUser->year, $dateUser->month, $dateUser->day, $dateAgency->hour, $dateAgency->minute, $dateAgency->second);
+
+        $hourUser = Carbon::create($request->hour);
+        $inputUser =Carbon::create($dateUser->year, $dateUser->month, $dateUser->day, $hourUser->hour, $hourUser->minute, $hourUser->second);
+
+        $dif = ($inputAgency->diffInMinutes($inputUser, false));
+
+        $input = new Input();
+        $input->ip = $request->ip;
+        $input->phone = $user->phone;
+        $input->date = $request->date;
+        $input->hour = $request->hour;
+        if ($dif > 0) {
+            $input->state = 1;
+            $input->delayed = $dif;
+        } else {
+            $input->state = 0;
+        }
+        $input->user_id = $request->user_id;
+        $input->save();
+        return back()->with('confirmation','Entrada Registrado con Exito');
+        return $request;
+    }
 }

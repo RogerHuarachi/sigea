@@ -56,6 +56,18 @@
                                                     @include('absences.delete')
                                                 @endcan
                                             </div>
+                                            <div class="btn-group">
+                                                {{-- @can('absences.first') --}}
+                                                    @if ($absence->type == 'Vacaciones')
+                                                        <a type="submit" class="btn btn-warning btn-sm" href="{{ route('absences.first', $absence->id) }}"><i class="fa fa-check"></i></a>
+                                                    @endif
+                                                {{-- @endcan --}}
+                                                {{-- @can('absences.first') --}}
+                                                    @if ($absence->type == 'Vacaciones')
+                                                        <a type="submit" class="btn btn-success btn-sm" href="{{ route('absences.second', $absence->id) }}"><i class="fa fa-check"></i></a>
+                                                    @endif
+                                                {{-- @endcan --}}
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -17,6 +17,8 @@ class CreateAbsencesTable extends Migration
             $table->bigIncrements('id');
             $table->string('type');
             $table->date('date');
+            $table->boolean('first')->default(false);
+            $table->boolean('second')->default(false);
             $table->unsignedBigInteger('user_id');
 
             $table->timestamps();
