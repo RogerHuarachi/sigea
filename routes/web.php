@@ -97,7 +97,7 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('permission:absences.destroy');
 
 
-        
+
     Route::get('absences/first/{absence}', 'Admin\AbsenceController@first')->name('absences.first');
         // ->middleware('permission:absences.first');
     Route::get('absences/second/{absence}', 'Admin\AbsenceController@second')->name('absences.second');
@@ -109,4 +109,8 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('permission:assistences.index');
     Route::get('print', 'Dashboard\AssistanceController@print')->name('assistences.print')
         ->middleware('permission:assistences.index');
+
+
+    Route::get('vacations', 'Admin\AbsenceController@vacation')->name('vacations.vacation');
+        // ->middleware('permission:vacations.index');
 });

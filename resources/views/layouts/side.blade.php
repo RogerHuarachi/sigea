@@ -110,6 +110,17 @@
                     </a>
                 </li>
             @endcan
+
+            {{-- @can('vacations.vacation') --}}
+                <li class="nav-item">
+                    <a href="{{ route('vacations.vacation') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Vacaciones
+                        </p>
+                    </a>
+                </li>
+            {{-- @endcan --}}
         </ul>
     </nav>
 </div>
