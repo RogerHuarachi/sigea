@@ -7,6 +7,7 @@ use App\Models\Absence;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class AbsenceController extends Controller
 {
@@ -93,35 +94,70 @@ class AbsenceController extends Controller
 
     public function vacation()
     {
-        // $absences = DB::table('absences')
-        // ->join('users', 'users.id', '=', 'absences.user_id')
-        // ->join('user_has_roles', 'user_has_roles.user_id', '=', 'users.id')
-        // ->join('roles', 'roles.id', '=', 'user_has_roles.role_id')
-        // ->where('roles.name', 'ENCARGADO DE SUCURSAL')
-        // ->orWhere('roles.name', 'ASESOR')
-        // ->select('absences.*')
-        // ->where('first', false)
-        // ->get();
+        $user = Auth::user();
 
-        // $absences = DB::table('absences')
-        // ->join('users', 'users.id', '=', 'absences.user_id')
-        // ->join('user_has_roles', 'user_has_roles.user_id', '=', 'users.id')
-        // ->join('roles', 'roles.id', '=', 'user_has_roles.role_id')
-        // ->where('roles.name', 'ENCARGADO NACIONAL DE OPERACIONES')
-        // ->select('absences.*')
-        // ->where('first', false)
-        // ->get();
+        if ($user->hasRole('DEPARTAMENTO NACIONAL DE RECURSOS HUMANOS')) {
+            $rrhh1 = DB::table('absences')
+            ->where('type', 'Vacaciones')
+            ->where('first', true)
+            ->where('second', false)
+            ->join('users', 'users.id', '=', 'absences.user_id')
+            ->join('user_has_roles', 'user_has_roles.user_id', '=', 'users.id')
+            ->join('roles', 'roles.id', '=', 'user_has_roles.role_id')
+            ->whereIn('roles.name', ['ENCARGADO NACIONAL DE OPERACIONES', 'ENCARGADO DE SUCURSAL', 'ASESOR'])
+            ->select('absences.*')
+            ->get();
+            
+            $rrhh2 = DB::table('absences')
+            ->where('type', 'Vacaciones')
+            ->where('second', false)
+            ->join('users', 'users.id', '=', 'absences.user_id')
+            ->join('user_has_roles', 'user_has_roles.user_id', '=', 'users.id')
+            ->join('roles', 'roles.id', '=', 'user_has_roles.role_id')
+            ->whereIn('roles.name', ['GERENCIA GENERAL', 
+                                        'DEPARTAMENTO NACIONAL DE RECURSOS HUMANOS', 
+                                        'DEPARTAMENTO NACIONAL DE CONTABILIDAD Y GESTION OPERATIVA', 
+                                        'DEPARTAMENTO NACIONAL COMERCIAL', 
+                                        'DEPARTAMENTO NACIONAL DE ASESORIA LEGAL', 
+                                        'TIC',
+                                        ])
+            ->select('absences.*')
+            ->get();
+    
+            $absences = $rrhh1->concat($rrhh2);
 
-        $absences = DB::table('absences')
-        ->join('users', 'users.id', '=', 'absences.user_id')
-        ->join('user_has_roles', 'user_has_roles.user_id', '=', 'users.id')
-        ->join('roles', 'roles.id', '=', 'user_has_roles.role_id')
-        ->where('roles.name', 'ENCARGADO NACIONAL DE OPERACIONES')
-        ->select('absences.*')
-        ->where('first', false)
-        ->where('first', false)
-        ->get();
+            return view('vacations.index', compact('absences'));
+            // return $absences;
+        } elseif ($user->hasRole('DEPARTAMENTO NACIONAL DE CONTABILIDAD Y GESTION OPERATIVA')) {
+            $absences = DB::table('absences')
+            ->where('type', 'Vacaciones')
+            ->where('first', false)
+            ->join('users', 'users.id', '=', 'absences.user_id')
+            ->join('user_has_roles', 'user_has_roles.user_id', '=', 'users.id')
+            ->join('roles', 'roles.id', '=', 'user_has_roles.role_id')
+            ->whereIn('roles.name', ['ENCARGADO NACIONAL DE OPERACIONES'])
+            ->select('absences.*')
+            ->get();
+            return view('vacations.index', compact('absences'));
+        } elseif ($user->hasRole('DEPARTAMENTO NACIONAL COMERCIAL')) {
+            $absences = DB::table('absences')
+            ->where('type', 'Vacaciones')
+            ->where('first', false)
+            ->join('users', 'users.id', '=', 'absences.user_id')
+            ->join('user_has_roles', 'user_has_roles.user_id', '=', 'users.id')
+            ->join('roles', 'roles.id', '=', 'user_has_roles.role_id')
+            ->whereIn('roles.name', ['ENCARGADO DE SUCURSAL', 'ASESOR',])
+            ->select('absences.*')
+            ->get();
 
-        return $absences;
+            return view('vacations.index', compact('absences'));
+        } else {
+            $absences = Absence::all();
+            // return view('vacations.index', compact('absences'));
+            return $absences;
+        }
+        
+
+        // return $user->hasRole('TIC');
     }
 }
