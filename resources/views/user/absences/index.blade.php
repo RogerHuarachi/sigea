@@ -10,9 +10,11 @@
         </div>
         <div class="col-sm-6">
             @can('absences.store')
-                <ol class="breadcrumb float-sm-right">
-                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#absenceCreate"><i class="fas fa-plus-circle"></i></button>
-                </ol>
+                @if (Auth::user()->vacation > 0)
+                    <ol class="breadcrumb float-sm-right">
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#absenceCreate"><i class="fas fa-plus-circle"></i></button>
+                    </ol>
+                @endif
             @endcan
         </div>
       </div>
