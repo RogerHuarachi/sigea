@@ -98,10 +98,10 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    Route::get('absences/first/{absence}', 'Admin\AbsenceController@first')->name('absences.first');
-        // ->middleware('permission:absences.first');
-    Route::get('absences/second/{absence}', 'Admin\AbsenceController@second')->name('absences.second');
-        // ->middleware('permission:absences.first');
+    Route::get('absences/first/{absence}', 'Admin\AbsenceController@first')->name('absences.first')
+        ->middleware('permission:absences.first');
+    Route::get('absences/second/{absence}', 'Admin\AbsenceController@second')->name('absences.second')
+        ->middleware('permission:absences.second');
 
 
     //Dashboard Asitencia
@@ -111,6 +111,12 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('permission:assistences.index');
 
 
-    Route::get('vacations', 'Admin\AbsenceController@vacation')->name('vacations.vacation');
-        // ->middleware('permission:vacations.index');
+    Route::get('vacationsuser', 'Admin\AbsenceController@vacation')->name('vacations.vacation')
+        ->middleware('permission:vacations.aprobed');
+
+        
+    Route::get('vacations', 'User\AbsenceController@index')->name('vacations.index')
+        ->middleware('permission:absences.store');
+    Route::post('vacations/store', 'User\AbsenceController@store')->name('vacations.store')
+        ->middleware('permission:absences.store');
 });

@@ -111,7 +111,7 @@
                 </li>
             @endcan
 
-            {{-- @can('vacations.vacation') --}}
+            @can('vacations.aprobed')
                 <li class="nav-item">
                     <a href="{{ route('vacations.vacation') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
@@ -120,7 +120,18 @@
                         </p>
                     </a>
                 </li>
-            {{-- @endcan --}}
+            @endcan
+
+            @can('absences.store')
+                <li class="nav-item">
+                    <a href="{{ route('vacations.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Mis Vacaciones
+                        </p>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </nav>
 </div>

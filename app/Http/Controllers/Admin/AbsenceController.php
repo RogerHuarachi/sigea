@@ -25,20 +25,15 @@ class AbsenceController extends Controller
 
     public function store(Request $request)
     {
-        // if ($request->type == 'Vacaciones') {
-        //     $user = User::where('id','=', $request->user_id)->firstOrFail();
-        //     $user->vacation = $user->vacation-1;
-        //     $user->save();
-
-        //     Absence::create($request->all());
-        //     return back()->with('confirmation','Registrado Correctamente');
-        // } else {
-        //     Absence::create($request->all());
-        //     return back()->with('confirmation','Registrado Correctamente');
-        // }
-
-        Absence::create($request->all());
-        return back()->with('confirmation','Registrado Correctamente');
+        if ($request->type == 'Vacaciones') {
+            Absence::create($request->all());
+            return back()->with('confirmation','Registrado Correctamente');
+        } else {
+            $request["first"] = true;
+            $request["second"] = true;
+            Absence::create($request->all());
+            return back()->with('confirmation','Registrado Correctamente');
+        }
     }
 
     public function show(Absence $absence)
@@ -105,7 +100,7 @@ class AbsenceController extends Controller
             ->join('user_has_roles', 'user_has_roles.user_id', '=', 'users.id')
             ->join('roles', 'roles.id', '=', 'user_has_roles.role_id')
             ->whereIn('roles.name', ['ENCARGADO NACIONAL DE OPERACIONES', 'ENCARGADO DE SUCURSAL', 'ASESOR'])
-            ->select('absences.*')
+            ->select('absences.*', 'users.name')
             ->get();
             
             $rrhh2 = DB::table('absences')
@@ -119,9 +114,10 @@ class AbsenceController extends Controller
                                         'DEPARTAMENTO NACIONAL DE CONTABILIDAD Y GESTION OPERATIVA', 
                                         'DEPARTAMENTO NACIONAL COMERCIAL', 
                                         'DEPARTAMENTO NACIONAL DE ASESORIA LEGAL', 
+                                        'ENCARGADO NACIONAL DE CREDITOS', 
                                         'TIC',
                                         ])
-            ->select('absences.*')
+            ->select('absences.*', 'users.name')
             ->get();
     
             $absences = $rrhh1->concat($rrhh2);
@@ -136,7 +132,7 @@ class AbsenceController extends Controller
             ->join('user_has_roles', 'user_has_roles.user_id', '=', 'users.id')
             ->join('roles', 'roles.id', '=', 'user_has_roles.role_id')
             ->whereIn('roles.name', ['ENCARGADO NACIONAL DE OPERACIONES'])
-            ->select('absences.*')
+            ->select('absences.*', 'users.name')
             ->get();
             return view('vacations.index', compact('absences'));
         } elseif ($user->hasRole('DEPARTAMENTO NACIONAL COMERCIAL')) {
@@ -147,14 +143,14 @@ class AbsenceController extends Controller
             ->join('user_has_roles', 'user_has_roles.user_id', '=', 'users.id')
             ->join('roles', 'roles.id', '=', 'user_has_roles.role_id')
             ->whereIn('roles.name', ['ENCARGADO DE SUCURSAL', 'ASESOR',])
-            ->select('absences.*')
+            ->select('absences.*', 'users.name')
             ->get();
 
             return view('vacations.index', compact('absences'));
         } else {
             $absences = Absence::all();
-            // return view('vacations.index', compact('absences'));
-            return $absences;
+            return view('vacations.index', compact('absences'));
+            // return $absences;
         }
         
 

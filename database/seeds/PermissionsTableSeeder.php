@@ -55,5 +55,11 @@ class PermissionsTableSeeder extends Seeder
 
         //assistence list
         Permission::create(['name' => 'assistences.index']);
+        
+        Permission::create(['name' => 'absences.first']);
+        Permission::create(['name' => 'absences.second']);
+        Permission::create(['name' => 'vacations.aprobed']);
+
+        
     }
 }

@@ -30,7 +30,7 @@
                             </select>
                         </div>
                         <br>
-                        <input class="form-control" type="date" placeholder="Fecha" name="date">
+                        <input class="form-control" type="date" placeholder="Fecha" name="date" required>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">

@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     {
         $gg = User::create([
             'name'       => 'LUIS ALEJANDRO ARZE RICO',
-            'vacation'       => '14',
+            'vacation'       => '15',
             'email'      => 'proeza.ale@gmail.com',
             'password'      => bcrypt('proezaalejandro2021'),
             'phone'       => 'Other',
@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
 
         $rrhh = User::create([
             'name'       => 'MARTHA PAOLA AMADOR',
-            'vacation'       => '15',
+            'vacation'       => '11',
             'email'      => 'proeza.marthapaola@gmail.com',
             'password'      => bcrypt('proezamarthapaola2021'),
             'phone'       => 'Huawei Browser',
@@ -34,7 +34,7 @@ class UsersTableSeeder extends Seeder
 
         $gnc = User::create([
             'name'       => 'GUALBERTO EDSSON COCA VARGAS',
-            'vacation'       => '8',
+            'vacation'       => '9',
             'email'      => 'proeza.edsson@gmail.com',
             'password'      => bcrypt('proezaedsson2021'),
             'phone'       => 'Samsung SM-A315G',
@@ -44,7 +44,7 @@ class UsersTableSeeder extends Seeder
 
         $gncgo = User::create([
             'name'       => 'LIMBERT RODRÍGUEZ ORELLANA',
-            'vacation'       => '3',
+            'vacation'       => '11',
             'email'      => 'proeza.limbert@gmail.com',
             'password'      => bcrypt('proezalimbert2021'),
             'phone'       => 'XiaoMi Redmi Note 7',
@@ -54,7 +54,7 @@ class UsersTableSeeder extends Seeder
 
         $gnal = User::create([
             'name'       => 'TERESA ALBA MIRANDA',
-            'vacation'       => '9',
+            'vacation'       => '6',
             'email'      => 'proeza.teresa@gmail.com',
             'password'      => bcrypt('proezateresa2021'),
             'phone'       => 'MAR-LX3A',
@@ -64,7 +64,7 @@ class UsersTableSeeder extends Seeder
 
         $jtic = User::create([
             'name'       => 'ROGER ALDAIR HUARACHI TAPIA',
-            'vacation'       => '12',
+            'vacation'       => '13',
             'email'      => 'proeza.roger@gmail.com',
             'password'      => bcrypt('6754212567542125'),
             'phone'       => 'M2101K6G',
@@ -72,7 +72,7 @@ class UsersTableSeeder extends Seeder
         ]);
         $jtic->assignRole('TIC');
 
-        $gno = User::create([
+        $gnc = User::create([
             'name'       => 'ELIZABETH CALLE COAQUIRA',
             'vacation'       => '8',
             'email'      => 'proeza.elycalle@gmail.com',
@@ -80,24 +80,34 @@ class UsersTableSeeder extends Seeder
             'phone'       => 'Samsung SM-A115M',
             'agency_id'      => 1,
         ]);
-        $gno->assignRole('ENCARGADO NACIONAL DE CREDITOS');
-
+        $gnc->assignRole('ENCARGADO NACIONAL DE CREDITOS');
+        
         $gno = User::create([
+            'name'       => 'YASHIRA DANYA CHAVEZ CAMACHO',
+            'vacation'       => '0',
+            'email'      => 'proeza.danya@gmail.com',
+            'password'      => bcrypt('proezadanya2021'),
+            'phone'       => 'TECNO CE7j',
+            'agency_id'      => 2,
+        ]);
+        $gno->assignRole('ENCARGADO NACIONAL DE OPERACIONES');
+
+        $eo = User::create([
             'name'       => 'JHOANA BRENDA JIMENEZ FLORES',
-            'vacation'       => '1',
+            'vacation'       => '5',
             'email'      => 'proeza.brenda@gmail.com',
             'password'      => bcrypt('proezabrenda2021'),
             'phone'       => 'Samsung SM-A125M',
             'agency_id'      => 2,
         ]);
-        $gno->assignRole('ENCARGADO NACIONAL DE OPERACIONES');
+        $eo->assignRole('ENCARGADO DE NORMALIZACION');
 
 
 
         $jas = [
             [
                 'name'       => 'CARLA ANDREA CLAROS PEREDO',
-                'vacation'       => '11',
+                'vacation'       => '15',
                 'email'      => 'proeza.carla22@gmail.com',
                 'password'      => bcrypt('proezacarla222021'),
                 'phone'       => 'iPhone',
@@ -105,7 +115,7 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'name'       => 'ALEX GUERRA GUZMAN',
-                'vacation'       => '11',
+                'vacation'       => '12',
                 'email'      => 'proeza.alex@gmail.com',
                 'password'      => bcrypt('proezaalex2021'),
                 'phone'       => 'Huawei STK-LX3',
@@ -113,7 +123,7 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'name'       => 'ROXANA LLANOS MAMANI',
-                'vacation'       => '12',
+                'vacation'       => '9',
                 'email'      => 'proeza.roxana@gmail.com',
                 'password'      => bcrypt('proezaroxana2021'),
                 'phone'       => 'Samsung SM-G532M',
@@ -129,7 +139,7 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'name'       => 'VERONICA ANEIVA SALAZAR',
-                'vacation'       => '7',
+                'vacation'       => '11',
                 'email'      => 'proeza.veronica@gmail.com',
                 'password'      => bcrypt('proezaveronica2021'),
                 'phone'       => 'Samsung SM-A325M',
@@ -152,7 +162,7 @@ class UsersTableSeeder extends Seeder
         $asesors = [
             [
                 'name'       => 'JHONNY PEDRO HUAYHUASI SOLIS',
-                'vacation'       => '10',
+                'vacation'       => '13',
                 'email'      => 'proeza.jhonny9@gmail.com',
                 'password'      => bcrypt('proezajhonny92021'),
                 'phone'       => 'XiaoMi Redmi Note 7',
@@ -160,7 +170,7 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'name'       => 'PABLO CHOQUE CAYO',
-                'vacation'       => '12',
+                'vacation'       => '13',
                 'email'      => 'proeza.pablochoque@gmail.com',
                 'password'      => bcrypt('proezapablochoque2021'),
                 'phone'       => 'Samsung SM-A155M',
@@ -168,7 +178,7 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'name'       => 'ARACELY MONTOYA ANDIA',
-                'vacation'       => '12',
+                'vacation'       => '13',
                 'email'      => 'proeza.aracely@gmail.com',
                 'password'      => bcrypt('proezaaracely2021'),
                 'phone'       => 'XiaoMi Redmi S2',
@@ -176,7 +186,7 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'name'       => 'ROCIO CLAROS ROJAS',
-                'vacation'       => '12',
+                'vacation'       => '13',
                 'email'      => 'proeza.rocio@gmail.com',
                 'password'      => bcrypt('proezarocio2021'),
                 'phone'       => 'Samsung SM-A115M',
@@ -208,7 +218,7 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'name'       => 'WILLIAMS YHAMIL SIRPA',
-                'vacation'       => '12',
+                'vacation'       => '13',
                 'email'      => 'proeza.williams@gmail.com',
                 'password'      => bcrypt('proezawilliams2021'),
                 'phone'       => 'Samsung SM-A725M',
@@ -229,14 +239,6 @@ class UsersTableSeeder extends Seeder
 
 
         $pasantes = [
-            [
-                'name'       => 'YASHIRA DANYA CHAVEZ CAMACHO',
-                'vacation'       => '0',
-                'email'      => 'proeza.danya@gmail.com',
-                'password'      => bcrypt('proezadanya2021'),
-                'phone'       => 'TECNO CE7j',
-                'agency_id'      => 2,
-            ],
             [
                 'name'       => 'NATALY ALISSIN GUERRERO MENDIZABAL',
                 'vacation'       => '0',
